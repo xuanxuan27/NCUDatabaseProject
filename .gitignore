@@ -106,3 +106,9 @@ GitHub.sublime-settings
 !.vscode/launch.json
 !.vscode/extensions.json
 .history
+
+# image files
+*.png
+
+# database files
+db_config.py
