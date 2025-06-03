@@ -33,6 +33,7 @@
 `run_stock_data_calculate_for_final_project.bat`  
    在工作排程器中建立此工作，設定在 ==每天 下午2:04== 觸發，`.bat`中需更改為本地路徑。
    (用到上述 `.sql`檔)
+
    此程式會在 mon-fri ：
     *    ==14:05== `check_and_run_sp()`
         * 先從 `stock_price_history_2023_to_2025` 取出當天 ([Date] = 今天) 篩選 10 支股票的筆數，如果筆數 ≥ 10，表示當天 10 支股票的日線資料都已插入。
