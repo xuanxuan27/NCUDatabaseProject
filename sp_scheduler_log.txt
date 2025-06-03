@@ -1,0 +1,19 @@
+2025-06-03 02:34:09 [INFO] - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-06-03 02:34:09 [INFO] - 排程設定完成：每日 14:05 執行 check_and_run_sp
+2025-06-03 02:34:09 [INFO] - Added job "check_and_run_sp" to job store "default"
+2025-06-03 02:34:09 [INFO] - Scheduler started
+2025-06-03 14:04:00 [INFO] - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-06-03 14:04:00 [INFO] - 排程設定完成：每日 14:05 執行 check_and_run_sp
+2025-06-03 14:04:00 [INFO] - Added job "check_and_run_sp" to job store "default"
+2025-06-03 14:04:00 [INFO] - Scheduler started
+2025-06-03 14:05:00 [INFO] - Running job "check_and_run_sp (trigger: cron[day_of_week='mon-fri', hour='14', minute='5'], next run at: 2025-06-03 14:05:00 CST)" (scheduled at 2025-06-03 14:05:00+08:00)
+2025-06-03 14:05:00 [INFO] - 開始執行 check_and_run_sp()
+2025-06-03 14:05:00 [INFO] - 今日 2025-06-03 已插入歷史資料筆數：10
+2025-06-03 14:05:00 [INFO] - 歷史資料齊全 (10 筆)，開始呼叫 MA/KD SP
+2025-06-03 14:05:00 [INFO] - 開始執行 SP: CalculateMA_All_Complete
+2025-06-03 14:05:00 [INFO] - 完成 SP: CalculateMA_All_Complete
+2025-06-03 14:05:00 [INFO] - 開始執行 SP: Calculate_KD_Values
+2025-06-03 14:05:22 [INFO] - 完成 SP: Calculate_KD_Values
+2025-06-03 14:05:22 [INFO] - 資料庫連線已關閉
+2025-06-03 14:05:22 [INFO] - 完成 check_and_run_sp
+2025-06-03 14:05:22 [INFO] - Job "check_and_run_sp (trigger: cron[day_of_week='mon-fri', hour='14', minute='5'], next run at: 2025-06-04 14:05:00 CST)" executed successfully
