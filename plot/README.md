@@ -1,90 +1,140 @@
-## 1. data_access.py
-功能：集中處理資料庫連線與資料擷取。
+## 功能特點
 
-主要函式：
+### 📥 Data Access
 
-get_db_connection(driver: str, server: str, database: str, uid: str, pwd: str) -> pyodbc.Connection
+* 直接從 `stock_price_history_2023_to_2025` 取出包含：
 
-建立並回傳 PyODBC 連線物件。
+  * `Date, Open, High, Low, Close, Volume`
+  * `MA5, MA10, MA20, MA60, MA120, MA240`
+  * `K_value, D_value`
+* 自動把 `Date` 設為 `DatetimeIndex`，方便時間序列分析
+* 支援依 `StockCode` 與日期區間 `BETWEEN` 篩選
 
-fetch_stock_data(conn, stock_code: int, start_date: str, end_date: str) -> pd.DataFrame
+---
 
-以範例 SQL 查詢 StockTrading_TA 表中指定股票代碼、日期範圍的資料。
+### 📊 Plotting Toolkit
 
-轉換為 DataFrame 後，以 Date 作為 Index。
+* **K 線＋成交量＋多條移動平均線**
 
-若查無資料，回傳空的 DataFrame。
+  * 可自訂要畫的 MA（`MA5、MA10、MA20、MA30、MA60、MA120、MA240`）
+* **布林帶 (Bollinger Bands)**
 
-## 2. plot_granville.py
-功能：繪製 Granville 八條法則綜合技術圖。
+  * 可指定中軸 MA（如 `MA20`），亦可 fallback 自行計算 MA
+* **相對強弱指數 (RSI)**
 
-外部相依：
+  * 以 `Close` 計算 RSI，並標示超買/超賣區域
+* **隨機震盪指標 (KD/Stochastic Oscillator)**
 
-data_access.get_db_connection、data_access.fetch_stock_data
+  * 直接使用資料表中的 `K_value、D_value`
+* **Granville 八條法則圖 (Granville Rules)**
 
-db_config.db_cfg
+  * Panel0：K 線＋指定 MA（預設 `MA20`）＋R1–R8 各規則標註
+  * Panel1：成交量
+  * Panel2：價格 vs MA 偏離率
+  * Panel3：MA 斜率
+  * Panel4：成交量移動平均 (Vol\_MA)
+* **黃金交叉 / 死亡交叉圖 (Cross Signals)**
 
-matplotlib, mplfinance, numpy, pandas
+  * 短/長期 MA 交叉標註（預設 `MA5 + MA20`）
+* **價格突破 / 跌破圖 (Breakout Signals)**
 
-主要流程：
+  * 價格與指定 MA（預設 `MA20`）的突破/跌破標註
 
-連線並擷取資料 → 檢查是否有資料
+---
 
-計算 Deviation, Slope, Vol_MA5
+### 🛠️ 模組化、可擴充
 
-根據 buy_or_sell 欄位篩選出 R1–R8 訊號，並指定對應顏色與形狀
+* `data_access.py`、`plot_figure.py`、`db_config.py` 三個獨立模組
+* 可自行調整繪圖參數（MA 週期、RSI 週期、KD 週期等）
+* 函式皆設有預設值，可直接 Plug-and-Play
 
-建立 mpf.make_addplot 清單，包含：
+---
 
-MA20 （Panel 0）
+### 🔧 高度自訂化
 
-R1–R8 訊號散點圖（Panel 0）
+* 繪圖函式參數化：
 
-Deviation 折線（Panel 2）
+  * 可傳入任意 MA 欄位清單（如 `['MA5','MA10','MA20']`）
+  * 可指定布林帶中軸 MA、RSI 週期、KD 讀取欄位
+  * 可指定 Granville MA 週期、Vol\_MA 週期、交叉短/長 MA 週期、突破 MA 週期
 
-Slope 折線（Panel 3）
+---
 
-Vol_MA5 折線（Panel 4）
+### 📦 易於整合
 
-呼叫 mpf.plot 繪製五面板圖，並於 Panel0 加 Legend
+* 只要放入同一工作資料夾，並在程式開頭 `import plot` 即可使用
+* 參考 `example_usage.py` 迅速上手
 
-存檔並關閉圖形
+---
 
-修改紀錄（如需）：
+## 環境與安裝
 
-可調整三角形大小（markersize）、顏色、Legend 位置
+### 要求
 
-若欲加入額外面板，可在 panel_ratios 與 addplots 清單增補設定
+* Python 版本：≥ 3.7
+* 必要套件：
 
-## 3. plot_all_charts.py
-功能：提供多支常見技術指標圖表繪製函式，並在 __main__ 中示範一次生成所有圖表的流程。
+  * `pandas` ≥ 1.5.0
+  * `numpy` ≥ 1.21.0
+  * `matplotlib` ≥ 3.5.0
+  * `mplfinance` ≥ 0.12.7a0
+  * `pyodbc` ≥ 4.0.30
 
-外部相依：
+---
 
-data_access.get_db_connection、data_access.fetch_stock_data
+### 安裝步驟
 
-db_config.db_cfg
+1. **建立與啟動虛擬環境（建議）**
 
-matplotlib, mplfinance, numpy, pandas、matplotlib.dates
+   ```bash
+   python -m venv venv
+   # Windows
+   .\venv\Scripts\activate
+   # macOS/Linux
+   source venv/bin/activate
+   ```
 
-模組函式：
+2. **安裝依賴套件**
 
-plot_candle_and_volume_chart(df, stock_code, save_path) -> str
+   ```bash
+   pip install pandas numpy matplotlib mplfinance pyodbc
+   ```
 
-直接接受 fetch_stock_data 回傳的 DataFrame，繪製 K 線＋成交量＋MA5/MA20/MA60＋Granville Rule 標註。
+3. **把 `plot` 資料夾放到你的專案根目錄**，保持如下結構：
 
-plot_bollinger(df, window=20, num_std=2, save_path) -> str
+   ```
+   your_project_root/
+   ├─ plot/
+   │   ├─ __init__.py
+   │   ├─ data_access.py
+   │   ├─ plot_figure.py
+   │   └─ db_config.py
+   ├─ example_usage.py
+   └─ README.md
+   ```
 
-計算並繪製布林通道（上下通道 + MA）。
+4. **編輯 `plot/db_config.py`**，填入你的資料庫連線參數（參考範例）。
 
-plot_rsi(df, period=14, save_path) -> str
+---
 
-計算並繪製 RSI。
+## 範例
 
-plot_kd(df, k_period=14, d_period=3, save_path) -> str
+在 `plot/db_config.py` 中，加入以下內容：
 
-計算並繪製 KD 隨機指標。
+```python
+# plot/db_config.py
 
-plot_all_charts(stock_code, start_date, end_date, output_prefix, db_config) -> dict
+db_cfg = {
+    'driver': 'SQL Server',
+    'server': '127.0.0.1',
+    'database': '......',
+    'uid': '.......',
+    'pwd': '......'
+}
+```
 
-依序呼叫上述四支函式，並回傳產生檔案的路徑字典。
+然後在命令列執行以下指令即可看到範例效果：
+
+```bash
+python -m plot.example_usage
+```
