@@ -1,11 +1,11 @@
 import pyodbc
 
 db_cfg = {
-    'driver': 'SQL Server',
-    'server': '127.0.0.1',
-    'database': 'stock_database',
-    'uid': '110502025',
-    'pwd': '1234'
+    'driver': 'driver',
+    'server': 'server',
+    'database': 'database name',
+    'uid': 'user name',
+    'pwd': 'password'
 }
 
 def get_db_connection(cfg):

@@ -15,7 +15,6 @@ from plot import (
     plot_granville_charts,
     plot_cross_chart,
     plot_breakout_chart,
-    plot_all_charts,
 )
 
 WAITING_FOR_CHART_TYPE = 101  # 顯示圖表：第一步選圖類型
