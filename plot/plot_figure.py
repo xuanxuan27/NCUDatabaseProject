@@ -3,9 +3,14 @@ import mplfinance as mpf
 import numpy as np
 import pandas as pd
 
-from plot.data_access import get_db_connection, fetch_stock_data
-from plot.db_config import db_cfg
+from data_access.data_access import get_db_connection, fetch_stock_data
+from data_access.db_config import db_cfg
 import granville_toolkit as gt
+
+import warnings
+# 忽略 UserWarning 和 FutureWarning
+warnings.filterwarnings("ignore", category=UserWarning)
+warnings.filterwarnings("ignore", category=FutureWarning)
 
 # 1. 中文字型設定
 plt.rcParams['font.sans-serif'] = ['Microsoft JhengHei']

@@ -106,20 +106,17 @@
    your_project_root/
    ├─ plot/
    │   ├─ __init__.py
-   │   ├─ data_access.py
-   │   ├─ plot_figure.py
-   │   └─ db_config.py
-   ├─ example_usage.py
+   │   └─ plot_figure.py
    └─ README.md
    ```
 
-4. **編輯 `plot/db_config.py`**，填入你的資料庫連線參數（參考範例）。
+4. **新增 `data_access/db_config.py`**，填入你的資料庫連線參數（參考範例）。
 
 ---
 
 ## 範例
 
-在 `plot/db_config.py` 中，加入以下內容：
+在 `data_access/db_config.py` 中，加入以下內容：
 
 ```python
 # plot/db_config.py
@@ -136,5 +133,5 @@ db_cfg = {
 然後在命令列執行以下指令即可看到範例效果：
 
 ```bash
-python -m plot.example_usage
+python -m tests.test_plot_figure
 ```

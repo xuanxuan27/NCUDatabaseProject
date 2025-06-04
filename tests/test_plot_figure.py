@@ -5,14 +5,13 @@
 """
 
 from plot import (
-    get_db_connection,
-    fetch_stock_data,
     plot_all_charts,
     plot_granville_charts,
     plot_cross_chart,
     plot_breakout_chart
 )
-from plot.db_config import db_cfg
+
+from data_access.db_config import db_cfg
 
 def main():
     stock_code = 2317

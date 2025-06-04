@@ -52,7 +52,7 @@ def fetch_stock_data(conn, stock_code: int, start_date: str, end_date: str) -> p
             MA240,
             K_value,
             D_value
-        FROM dbo.stock_price_history_2023_to_2025
+        FROM dbo.StockTrading_TA
         WHERE StockCode = ?
           AND [Date] BETWEEN ? AND ?
         ORDER BY [Date]
@@ -67,3 +67,5 @@ def fetch_stock_data(conn, stock_code: int, start_date: str, end_date: str) -> p
         return df
     df.set_index('Date', inplace=True)
     return df
+
+#         FROM dbo.stock_price_history_2023_to_2025
