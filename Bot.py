@@ -20,7 +20,7 @@ WAITING_FOR_STOCK_CODE_CHART = 102  # 顯示圖表：輸入股票代碼
 WAITING_FOR_DATE_RANGE = 103
 
 if __name__ == '__main__':
-    bot_token = "7553821936:AAFLgenQrrE851GAHPp1tJva3jV9mcfvKZg"
+    bot_token = "your token"
 
     try:
         app = ApplicationBuilder().token(bot_token).build()
