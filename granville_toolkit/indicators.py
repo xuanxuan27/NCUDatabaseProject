@@ -267,4 +267,22 @@ def granville_rules(
         UserWarning
     )
     
-    return result_df 
+    return result_df
+
+
+def calculate_rsi(df, period=14, out_col='RSI'):
+    delta = df['close'].diff()
+    gain = (delta.where(delta > 0, 0)).rolling(window=period).mean()
+    loss = (-delta.where(delta < 0, 0)).rolling(window=period).mean()
+    rs = gain / loss
+    df[out_col] = 100 - (100 / (1 + rs))
+    return df
+
+
+def calculate_kd(df, n=9, m1=3, m2=3, out_k='K', out_d='D'):
+    low_min = df['low'].rolling(window=n).min()
+    high_max = df['high'].rolling(window=n).max()
+    rsv = (df['close'] - low_min) / (high_max - low_min) * 100
+    df[out_k] = rsv.ewm(com=m1-1, adjust=False).mean()
+    df[out_d] = df[out_k].ewm(com=m2-1, adjust=False).mean()
+    return df 

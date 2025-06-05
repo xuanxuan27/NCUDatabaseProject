@@ -11,7 +11,9 @@ from .indicators import (
     moving_average,
     volume_average,
     crossover_signal,
-    breakout_signal
+    breakout_signal,
+    calculate_kd,
+    calculate_rsi
 )
 
 from .granville_rules import (

@@ -91,9 +91,18 @@ def test_toolkit():
         count = (df['granville_signal'] == rule_num).sum()
         print(f"Rule {rule_num}: {description} (觸發次數: {count})")
     
+    print("\nTesting KD and RSI indicators...")
+    # Test RSI
+    df = gt.calculate_rsi(df, period=14, out_col='RSI')
+    print(f"✓ RSI calculated, sample values: {df['RSI'].dropna().head(3).values}")
+    # Test KD
+    df = gt.calculate_kd(df, n=9, m1=3, m2=3, out_k='K', out_d='D')
+    print(f"✓ KD calculated, sample K values: {df['K'].dropna().head(3).values}")
+    print(f"✓ KD calculated, sample D values: {df['D'].dropna().head(3).values}")
+    
     print("\nDisplaying sample results:")
     display_cols = ['date', 'close', 'ma5', 'ma20', 'volume', 'vol_ma5', 
-                   'golden_cross', 'breakout', 'granville_signal']
+                   'golden_cross', 'breakout', 'granville_signal', 'RSI', 'K', 'D']
     print(df[display_cols].tail(10))
     
     # Show specific Granville signals
