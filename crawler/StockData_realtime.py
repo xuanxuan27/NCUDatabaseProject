@@ -16,9 +16,9 @@ logging.basicConfig(
 # MSSQL 設定
 db_settings = {
     "host": "127.0.0.1",
-    "user": "pohan",
-    "password": "",
-    "database": "ncu_database",
+    "user": "110502025",
+    "password": "1234",
+    "database": "stock_database",
     "charset": "utf8"
 }
 
@@ -27,7 +27,6 @@ scheduler = BlockingScheduler(timezone='Asia/Taipei')
 
 # 記錄上次插入的股票數據
 last_record = {}
-
 
 def fetch_stock_data(stock_code, stock_type):
     """ 從 API 抓取指定股票的數據 """
@@ -43,7 +42,7 @@ def fetch_stock_data(stock_code, stock_type):
         else:
             logging.warning(f"⚠️ {stock_code} 無資料回應 (API 正常但回傳空資料)")
     except Exception as e:
-        logging.error(f"❌ 無法獲取 {stock_code} 的數據: {e}")
+        logging.error(f"無法獲取 {stock_code} 的數據: {e}")
 
     return None
 
@@ -240,14 +239,6 @@ def fetch_and_save_today_history():
             logging.error(f"❌ {code} 歷史資料寫入失敗：{e}")
 
     conn.close()
-
-
-
-
-
-
-
-
 
 #### main ######################################
 

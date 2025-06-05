@@ -1,11 +1,13 @@
 import pyodbc
 
+BOT_TOKEN = "7553821936:AAFLgenQrrE851GAHPp1tJva3jV9mcfvKZg"
+
 db_cfg = {
-    'driver': 'driver',
-    'server': 'server',
-    'database': 'database name',
-    'uid': 'user name',
-    'pwd': 'password'
+    'driver': 'ODBC Driver 17 for SQL Server',
+    'server': '127.0.0.1',
+    'database': '',
+    'uid': '',
+    'pwd': ''
 }
 
 def get_db_connection(cfg):

@@ -2,13 +2,13 @@ import aiohttp
 import json
 from telegram import Update
 from telegram.ext import ContextTypes, ConversationHandler
-from handlers.menu import markup
+from utils.keyboards import markup
 
 async def query_stock(update: Update, context: ContextTypes.DEFAULT_TYPE):
     stock_code = update.message.text.strip()
     if stock_code == '0':
         await update.message.reply_text("結束查詢", reply_markup=markup)
-        return ConversationHandler.END
+        return 0
 
     url = f"https://mis.twse.com.tw/stock/api/getStockInfo.jsp?ex_ch=tse_{stock_code}.tw&json=1"
 

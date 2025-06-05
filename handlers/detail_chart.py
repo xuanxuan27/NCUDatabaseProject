@@ -4,8 +4,8 @@ import os
 from telegram import Update
 from telegram.ext import ContextTypes
 from telegram.ext import ConversationHandler
-from utils.db import db_cfg, get_db_connection
-from handlers.menu import markup
+from utils.config import db_cfg, get_db_connection
+from utils.keyboards import markup
 from plot import (
     fetch_stock_data,
     plot_candle_and_volume_chart,
@@ -27,7 +27,7 @@ async def handle_chart_type(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
     if chart_type == "結束":
         await update.message.reply_text("已結束，回到主選單。", reply_markup=markup)
-        return ConversationHandler.END
+        return 0
     else:
         context.user_data['chart_type'] = chart_type
         await update.message.reply_text("請輸入股票代碼，例如：2330")
@@ -60,7 +60,7 @@ async def handle_date_range_and_generate_chart(update: Update, context: ContextT
         df = fetch_stock_data(conn, stock_code, start_date, end_date)
     except Exception as e:
         await update.message.reply_text(f"⚠️ 取得資料失敗：{e}")
-        return ConversationHandler.END
+        return 0
 
     img_dir = "images"
     os.makedirs(img_dir, exist_ok=True)
