@@ -17,7 +17,7 @@ def plot_candle_and_volume_chart(
     save_path: str = ".",
     ma_columns: list = None
 ) -> str:
-    """
+    """git merge main
     繪製 K 棒＋成交量＋MA，不再顯示 Granville 買賣訊號，並存檔。
     ma_columns: list of MA column names in df (e.g. ['MA5','MA20','MA60'])
     """

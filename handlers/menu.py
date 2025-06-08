@@ -48,7 +48,8 @@ async def handle_menu_selection(update: Update, context: ContextTypes.DEFAULT_TY
     elif text == "追蹤標的清單":
         return await show_watchlist(update, context)
     elif text == "回測":
-        await update.message.reply_text("請輸入回測參數")
+        await update.message.reply_text("請輸入回測股票代碼，例如：2330")
+        return 301
     else:
         await update.message.reply_text("請從選單中選擇有效的選項")
         return 0
