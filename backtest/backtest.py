@@ -88,14 +88,14 @@ def backtest_single_stock_enhanced(
         gran = int(row['granville_signal'])
         cross = int(row['cross_signal'])
         brk = int(row['breakout_signal'])
-        tp_price = close * (1 + take_profit_pct)
+        tp_price = entry_price * (1 + take_profit_pct)
 
         # 持倉 > 0 時，檢查是否要賣出
         if shares > 0:
             rule_used = ""
             # 1) 停利條件
-            if high >= tp_price:
-                sell_price = tp_price
+            if high >= entry_price * (1 + take_profit_pct):
+                sell_price = entry_price * (1 + take_profit_pct)
                 rule_used = "停利 - 賣出"
             # 2) 葛蘭必賣訊
             elif gran in [5,6,7,8]:

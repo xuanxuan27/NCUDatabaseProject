@@ -23,7 +23,7 @@ def plot_candle_and_volume_chart(
     ma_columns: list = None  # 可以傳入要畫的 MA 欄位名稱，預設為 ['MA5','MA20','MA60']
 ) -> str:
     """
-    繪製 K 棒＋成交量＋MA，不再顯示 Granville 買賣訊號，並存檔。
+    繪製 K 棒＋成交量＋MA，並存檔。
     ma_columns: list of MA column names in df (e.g. ['MA5','MA20','MA60'])
     """
     if ma_columns is None:

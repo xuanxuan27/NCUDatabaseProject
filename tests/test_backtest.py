@@ -4,7 +4,7 @@ from data_access import get_db_connection, fetch_stock_data, db_cfg
 from backtest.backtest import prepare_signals, backtest_single_stock_enhanced
 
 def main():
-    stock_code = 2317
+    stock_code = 2330
     start_date = '2023-01-01'
     end_date   = '2023-06-30'
 
