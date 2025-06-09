@@ -8,7 +8,7 @@ if exist venv\Scripts\activate (
 )
 
 REM 執行 Python 爬蟲程式
-python "D:\碩一\資料庫系統實作專題\Final_project\StockData_realtime.py"
+python "..\NCUDatabaseProject\crawler\StockData_realtime.py"
 
 
 pause

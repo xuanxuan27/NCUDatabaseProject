@@ -14,9 +14,9 @@ logging.basicConfig(
 # ─── MSSQL 連線參數 ───────────────────────────────────────────────────
 db_settings = {
     "host":     "127.0.0.1",    # 或你的主機 IP / 主機名稱
-    "user":     "pohan",        # 資料庫使用者
-    "password": "",    # 資料庫密碼
-    "database": "ncu_database", # 你要連線的資料庫名稱
+    "user":     "110502025",        # 資料庫使用者
+    "password": "1234",    # 資料庫密碼
+    "database": "stock_database", # 你要連線的資料庫名稱
     "charset":  "utf8"
 }
 
@@ -101,6 +101,8 @@ def check_and_run_sp():
 
 
 if __name__ == "__main__":
+    check_and_run_sp()
+    '''
     # 只排程：每天 14:05 檢查並執行 MA/KD SP
     scheduler.add_job(
         check_and_run_sp,
@@ -119,3 +121,4 @@ if __name__ == "__main__":
     except (KeyboardInterrupt, SystemExit):
         scheduler.shutdown()
         logging.info("排程器停止")
+    '''

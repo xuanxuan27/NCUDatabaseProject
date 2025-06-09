@@ -8,9 +8,9 @@ from dateutil.relativedelta import relativedelta
 # 資料庫設定
 db_settings = {
     "host": "127.0.0.1",
-    "user": "pohan",
-    "password": "",
-    "database": "ncu_database",
+    "user": "110502025",
+    "password": "1234",
+    "database": "stock_database",
     "charset": "utf8"
 }
 

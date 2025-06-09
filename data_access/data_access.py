@@ -52,6 +52,7 @@ def fetch_stock_data(conn, stock_code: int, start_date: str, end_date: str) -> p
             MA240,
             K_value,
             D_value
+        FROM dbo.StockTrading_TA_WithMA
         FROM dbo.StockTrading_TA
         WHERE StockCode = ?
           AND [Date] BETWEEN ? AND ?

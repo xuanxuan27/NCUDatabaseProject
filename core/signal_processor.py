@@ -9,6 +9,7 @@ This module handles:
 
 import pandas as pd
 import numpy as np
+import decimal
 from datetime import datetime, timedelta
 from typing import List, Optional, Dict, Any
 from dataclasses import dataclass
@@ -26,6 +27,11 @@ from granville_toolkit import (
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
+def convert_decimal_to_float(df: pd.DataFrame, columns: List[str]) -> pd.DataFrame:
+    for col in columns:
+        if col in df.columns:
+            df[col] = df[col].apply(lambda x: float(x) if isinstance(x, decimal.Decimal) else x)
+    return df
 
 @dataclass
 class Signal:
@@ -66,6 +72,9 @@ def generate_signals(
     Returns:
         List of Signal objects
     """
+    # 加入轉型：確保所有運算欄位都是 float
+    df = convert_decimal_to_float(df, ['open', 'high', 'low', 'close', 'volume'])
+
     if config is None:
         config = SignalConfig()
     
@@ -112,6 +121,9 @@ def calculate_indicators(
     Returns:
         DataFrame with added technical indicators
     """
+    # 加入轉型：確保所有運算欄位都是 float
+    df = convert_decimal_to_float(df, ['open', 'high', 'low', 'close', 'volume'])
+
     if df.empty:
         raise SignalProcessingError("Input DataFrame is empty")
     
